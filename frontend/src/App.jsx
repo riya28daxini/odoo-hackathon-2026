@@ -7,10 +7,10 @@ import { Toast } from './components/Toast';
 // Views
 import { LandingView } from './views/LandingView';
 import { AuthView } from './views/AuthView';
-// import { MyTripsView } from './views/MyTripsView';
+import { MyTripsView } from './views/MyTripsView';
 import { CreateTripView } from './views/CreateTripView';
 // import { ItineraryBuilderView } from './views/ItineraryBuilderView';
-// import { ItineraryDetailView } from './views/ItineraryDetailView';
+import { ItineraryDetailView } from './views/ItineraryDetailView';
 // import { SearchBrowseView } from './views/SearchBrowseView';
 // import { CalendarView } from './views/CalendarView';
 // import { CommunityView } from './views/CommunityView';
