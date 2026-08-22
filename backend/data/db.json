@@ -1,0 +1,815 @@
+{
+  "users": [
+    {
+      "id": "usr-ind-101",
+      "firstName": "riya",
+      "lastName": "Sharma",
+      "username": "aaravsharma",
+      "email": "aarav.sharma@globetrotter.in",
+      "phone": "+91 98765 43210",
+      "city": "Mumbai",
+      "country": "India",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80",
+      "bio": "Avid traveler, chai lover, and mountain trekker. Explored 18 Indian states from the snow peaks of Ladakh to the tropical backwaters of Kerala!",
+      "language": "English (India)",
+      "currency": "INR (₹)",
+      "role": "Explorer Pro",
+      "travelScore": 980,
+      "placesVisitedCount": 18,
+      "tripsCount": 14,
+      "reviewsCount": 42,
+      "savedDestinations": [
+        {
+          "id": "city-ind-1",
+          "name": "Goa",
+          "state": "Goa",
+          "country": "India",
+          "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&auto=format&fit=crop&q=80",
+          "rating": 4.9,
+          "category": "Beaches & Nightlife",
+          "avgCostPerDay": 3500
+        },
+        {
+          "id": "city-ind-4",
+          "name": "Leh-Ladakh",
+          "state": "Ladakh",
+          "country": "India",
+          "image": "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?w=800&auto=format&fit=crop&q=80",
+          "rating": 4.95,
+          "category": "Adventure & Mountains",
+          "avgCostPerDay": 4500
+        }
+      ],
+      "passwordHash": "$2a$10$wK1y3/E3ZgG5O.TzYF.MNe5p2d55sA9iS6sS9V.X.F7j8h6l9L2mC"
+    },
+    {
+      "id": "usr-ind-1787379401986",
+      "firstName": "Riya",
+      "lastName": "Daxini",
+      "username": "riya28daxini",
+      "email": "riya28daxini@gmail.com",
+      "phone": "9773197490",
+      "city": "Rajkot",
+      "country": "India",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Riya",
+      "bio": "Excited traveler exploring Incredible India with GlobeTrotter!",
+      "language": "English (India)",
+      "currency": "INR (₹)",
+      "role": "Explorer Pro",
+      "travelScore": 100,
+      "placesVisitedCount": 1,
+      "tripsCount": 0,
+      "reviewsCount": 0,
+      "savedDestinations": [],
+      "passwordHash": "$2a$10$hZv48b6FxZMY//3wljr8sOpjWoTut/P8Odc1juw6nla6P20BAkhty"
+    }
+  ],
+  "cities": [
+    {
+      "id": "city-ind-1",
+      "name": "Goa",
+      "state": "Goa",
+      "country": "India",
+      "region": "West India",
+      "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&auto=format&fit=crop&q=80",
+      "description": "Sun-kissed Arabian Sea beaches, Portuguese colonial architecture, vibrant beach shacks, water sports, and sunset cruises.",
+      "rating": 4.9,
+      "reviews": 3850,
+      "avgCostPerDay": 3500,
+      "bestTimeToVisit": "Nov - Feb",
+      "popularActivitiesCount": 52,
+      "badge": "Top Beach Destination"
+    },
+    {
+      "id": "city-ind-2",
+      "name": "Jaipur",
+      "state": "Rajasthan",
+      "country": "India",
+      "region": "North India",
+      "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&auto=format&fit=crop&q=80",
+      "description": "The iconic Pink City boasting majestic Amber Fort, Hawa Mahal, royal palaces, and authentic Rajasthani Dal Baati Churma.",
+      "rating": 4.85,
+      "reviews": 2940,
+      "avgCostPerDay": 2800,
+      "bestTimeToVisit": "Oct - Mar",
+      "popularActivitiesCount": 46,
+      "badge": "Royal Heritage"
+    },
+    {
+      "id": "city-ind-3",
+      "name": "Manali",
+      "state": "Himachal Pradesh",
+      "country": "India",
+      "region": "North India",
+      "image": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&auto=format&fit=crop&q=80",
+      "description": "High-altitude Himalayan valley with snow-capped Solang slopes, apple orchards, Rohtang Pass adventures, and cozy mountain cafés.",
+      "rating": 4.8,
+      "reviews": 3200,
+      "avgCostPerDay": 3200,
+      "bestTimeToVisit": "Oct - Jun (Snow in Dec-Feb)",
+      "popularActivitiesCount": 38,
+      "badge": "Snow & Adventure"
+    },
+    {
+      "id": "city-ind-4",
+      "name": "Leh-Ladakh",
+      "state": "Ladakh",
+      "country": "India",
+      "region": "North India",
+      "image": "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?w=800&auto=format&fit=crop&q=80",
+      "description": "High desert wonderland of turquoise Pangong Tso Lake, ancient Buddhist monasteries, Nubra Valley sand dunes, and Khardung La.",
+      "rating": 4.95,
+      "reviews": 2100,
+      "avgCostPerDay": 4500,
+      "bestTimeToVisit": "May - Sep",
+      "popularActivitiesCount": 30,
+      "badge": "Bucket List Epic"
+    },
+    {
+      "id": "city-ind-5",
+      "name": "Munnar & Alleppey",
+      "state": "Kerala",
+      "country": "India",
+      "region": "South India",
+      "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&auto=format&fit=crop&q=80",
+      "description": "God's Own Country featuring emerald rolling tea estates in Munnar and serene traditional houseboat cruises on Alleppey backwaters.",
+      "rating": 4.9,
+      "reviews": 2750,
+      "avgCostPerDay": 3800,
+      "bestTimeToVisit": "Sep - Mar",
+      "popularActivitiesCount": 42,
+      "badge": "Nature & Backwaters"
+    },
+    {
+      "id": "city-ind-6",
+      "name": "Varanasi",
+      "state": "Uttar Pradesh",
+      "country": "India",
+      "region": "North India",
+      "image": "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=800&auto=format&fit=crop&q=80",
+      "description": "Spiritual heart of India along the sacred River Ganga, famous for the mesmerizing Dashashwamedh Ghat Evening Aarti and morning boat rides.",
+      "rating": 4.88,
+      "reviews": 3400,
+      "avgCostPerDay": 2200,
+      "bestTimeToVisit": "Oct - Mar",
+      "popularActivitiesCount": 34,
+      "badge": "Spiritual & Cultural"
+    },
+    {
+      "id": "city-ind-7",
+      "name": "Rishikesh",
+      "state": "Uttarakhand",
+      "country": "India",
+      "region": "North India",
+      "image": "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&auto=format&fit=crop&q=80",
+      "description": "Yoga capital of the world, offering thrilling Ganga white water river rafting, cliff jumping, bungee jumps, and serene riverside ashrams.",
+      "rating": 4.82,
+      "reviews": 2600,
+      "avgCostPerDay": 2500,
+      "bestTimeToVisit": "Sep - Nov & Feb - May",
+      "popularActivitiesCount": 36,
+      "badge": "Yoga & Rafting"
+    },
+    {
+      "id": "city-ind-8",
+      "name": "Udaipur",
+      "state": "Rajasthan",
+      "country": "India",
+      "region": "North India",
+      "image": "https://images.unsplash.com/photo-1615836245337-f5b9b2303f10?w=800&auto=format&fit=crop&q=80",
+      "description": "City of Lakes surrounded by Aravalli Hills, featuring fairy-tale City Palace, Lake Pichola sunset boat rides, and romantic heritage havelis.",
+      "rating": 4.92,
+      "reviews": 2890,
+      "avgCostPerDay": 3600,
+      "bestTimeToVisit": "Oct - Mar",
+      "popularActivitiesCount": 40,
+      "badge": "Romantic Lakes"
+    }
+  ],
+  "activities": [
+    {
+      "id": "act-ind-1",
+      "cityName": "Goa",
+      "title": "Scuba Diving & Watersports at Grand Island",
+      "category": "Adventure & Water Sports",
+      "duration": "4.5 Hours",
+      "cost": 2499,
+      "rating": 4.9,
+      "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&auto=format&fit=crop&q=80",
+      "description": "Guided scuba diving session with underwater video recording, followed by jet ski, parasailing, and banana ride.",
+      "timeOfDay": "Morning"
+    },
+    {
+      "id": "act-ind-2",
+      "cityName": "Goa",
+      "title": "Mandovi River Sunset Cruise & Goan Folk Dance",
+      "category": "Sightseeing & Culture",
+      "duration": "2.0 Hours",
+      "cost": 650,
+      "rating": 4.75,
+      "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&auto=format&fit=crop&q=80",
+      "description": "Scenic cruise with live Goan music, Portuguese folk dance performances, and sunset views over Panaji skyline.",
+      "timeOfDay": "Evening"
+    },
+    {
+      "id": "act-ind-3",
+      "cityName": "Jaipur",
+      "title": "Amber Fort Guided Heritage Walk & Sheesh Mahal",
+      "category": "Royal Heritage",
+      "duration": "3.0 Hours",
+      "cost": 500,
+      "rating": 4.92,
+      "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=600&auto=format&fit=crop&q=80",
+      "description": "Explore the majestic 16th-century fortress, mirrored Hall of Mirrors (Sheesh Mahal), and panoramic Maota Lake views.",
+      "timeOfDay": "Morning"
+    },
+    {
+      "id": "act-ind-4",
+      "cityName": "Jaipur",
+      "title": "Chokhi Dhani Rajasthani Village & Thali Feast",
+      "category": "Food & Cultural Dining",
+      "duration": "4.0 Hours",
+      "cost": 1100,
+      "rating": 4.88,
+      "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&auto=format&fit=crop&q=80",
+      "description": "Authentic royal Rajasthani dining experience with puppet shows, camel rides, Kalbeliya folk dance, and unlimited royal thali.",
+      "timeOfDay": "Evening"
+    },
+    {
+      "id": "act-ind-5",
+      "cityName": "Manali",
+      "title": "Solang Valley Paragliding & Zorbing Adventure",
+      "category": "Adventure",
+      "duration": "3.5 Hours",
+      "cost": 3200,
+      "rating": 4.95,
+      "image": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&auto=format&fit=crop&q=80",
+      "description": "Tandem high-fly paragliding over pine-covered valleys with snow-capped Himalayan panoramas.",
+      "timeOfDay": "Morning"
+    },
+    {
+      "id": "act-ind-6",
+      "cityName": "Leh-Ladakh",
+      "title": "Pangong Tso Lake Camping & Stargazing",
+      "category": "Nature & Camping",
+      "duration": "Full Day",
+      "cost": 4800,
+      "rating": 4.98,
+      "image": "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?w=600&auto=format&fit=crop&q=80",
+      "description": "Camp next to the mesmerizing color-changing lake at 14,000 feet with crystal-clear views of the Milky Way galaxy.",
+      "timeOfDay": "Evening"
+    },
+    {
+      "id": "act-ind-7",
+      "cityName": "Munnar & Alleppey",
+      "title": "Overnight Houseboat Cruise with Kerala Karimeen Fry",
+      "category": "Backwaters & Stay",
+      "duration": "Overnight",
+      "cost": 6500,
+      "rating": 4.95,
+      "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&auto=format&fit=crop&q=80",
+      "description": "Private traditional Kettuvallam boat cruising through palm-fringed canals, serving authentic Kerala spice meals on banana leaf.",
+      "timeOfDay": "Afternoon"
+    },
+    {
+      "id": "act-ind-8",
+      "cityName": "Varanasi",
+      "title": "Ganga Sunrise Boat Ride & Dashashwamedh Evening Aarti",
+      "category": "Spiritual & Heritage",
+      "duration": "3.0 Hours",
+      "cost": 400,
+      "rating": 4.96,
+      "image": "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=600&auto=format&fit=crop&q=80",
+      "description": "Morning rowing boat past historical ghats, followed by the grand synchronized fire aarti at sunset.",
+      "timeOfDay": "Morning"
+    },
+    {
+      "id": "act-ind-9",
+      "cityName": "Rishikesh",
+      "title": "Ganga White Water Rafting (16km Shivpuri Stretch)",
+      "category": "Adventure & Rafting",
+      "duration": "3.5 Hours",
+      "cost": 1200,
+      "rating": 4.9,
+      "image": "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&auto=format&fit=crop&q=80",
+      "description": "Conquer Grade III+ rapids including Roller Coaster and Golf Course with cliff jumping and body surfing.",
+      "timeOfDay": "Morning"
+    },
+    {
+      "id": "act-ind-10",
+      "cityName": "Udaipur",
+      "title": "Lake Pichola Sunset Boat Ride & Jag Mandir Island",
+      "category": "Romantic & Sightseeing",
+      "duration": "2.0 Hours",
+      "cost": 850,
+      "rating": 4.88,
+      "image": "https://images.unsplash.com/photo-1615836245337-f5b9b2303f10?w=600&auto=format&fit=crop&q=80",
+      "description": "Glide on calm lake waters passing the illuminated City Palace and Taj Lake Palace.",
+      "timeOfDay": "Evening"
+    }
+  ],
+  "trips": [
+    {
+      "id": "trip-ind-1787377924112",
+      "userId": "usr-ind-101",
+      "title": "Royal Rajasthan Forts & Desert Odyssey",
+      "destination": "Jaipur, Rajasthan",
+      "status": "upcoming",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-18",
+      "totalDays": 7,
+      "currentDay": 0,
+      "coverImage": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&auto=format&fit=crop&q=80",
+      "budgetTotal": 30000,
+      "budgetSpent": 0,
+      "travelers": 2,
+      "isPublic": false,
+      "likes": 0,
+      "notes": "Exploring heritage forts, enjoying traditional Dal Baati Churma, and taking camel safaris.",
+      "sections": [
+        {
+          "id": "sec-1-1787377924112",
+          "dayNumber": 1,
+          "date": "2026-10-12",
+          "title": "Day 1: Arrival & Local Food Walk in Jaipur",
+          "dailyBudget": 4286,
+          "timeSpentHours": 5,
+          "activities": [
+            {
+              "id": "act-1787377924094-act-ind-3",
+              "title": "Amber Fort Guided Heritage Walk & Sheesh Mahal",
+              "category": "Royal Heritage",
+              "time": "09:00 - 12:30",
+              "cost": 500,
+              "notes": "Explore the majestic 16th-century fortress, mirrored Hall of Mirrors (Sheesh Mahal), and panoramic Maota Lake views."
+            }
+          ]
+        }
+      ],
+      "expensesBreakdown": {
+        "stay": 12000,
+        "transport": 6000,
+        "food": 6000,
+        "activities": 4500,
+        "misc": 1500
+      }
+    },
+    {
+      "id": "trip-ind-1787377855972",
+      "userId": "usr-ind-101",
+      "title": "goa visit",
+      "destination": "Goa, Goa",
+      "status": "upcoming",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-18",
+      "totalDays": 7,
+      "currentDay": 0,
+      "coverImage": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&auto=format&fit=crop&q=80",
+      "budgetTotal": 30000,
+      "budgetSpent": 0,
+      "travelers": 2,
+      "isPublic": false,
+      "likes": 0,
+      "notes": "Exploring heritage forts, enjoying traditional Dal Baati Churma, and taking camel safaris.",
+      "sections": [
+        {
+          "id": "sec-1-1787377855972",
+          "dayNumber": 1,
+          "date": "2026-10-12",
+          "title": "Day 1: Arrival & Local Food Walk in Goa",
+          "dailyBudget": 4286,
+          "timeSpentHours": 5,
+          "activities": []
+        }
+      ],
+      "expensesBreakdown": {
+        "stay": 12000,
+        "transport": 6000,
+        "food": 6000,
+        "activities": 4500,
+        "misc": 1500
+      }
+    },
+    {
+      "id": "trip-ind-101",
+      "userId": "usr-ind-101",
+      "title": "Royal Rajasthan Heritage & Desert Odyssey",
+      "destination": "Jaipur & Udaipur, Rajasthan",
+      "status": "ongoing",
+      "startDate": "2026-08-20",
+      "endDate": "2026-08-26",
+      "totalDays": 7,
+      "currentDay": 3,
+      "coverImage": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&auto=format&fit=crop&q=80",
+      "budgetTotal": 35000,
+      "budgetSpent": 16800,
+      "travelers": 2,
+      "isPublic": true,
+      "likes": 142,
+      "notes": "Booked Vande Bharat Express from Delhi to Jaipur. Carry traditional clothes for Chokhi Dhani photography.",
+      "sections": [
+        {
+          "id": "sec-ind-1",
+          "dayNumber": 1,
+          "date": "2026-08-20",
+          "title": "Arrival in Jaipur & Johari Bazaar Street Food",
+          "dailyBudget": 4500,
+          "timeSpentHours": 6,
+          "activities": [
+            {
+              "id": "act-r101",
+              "title": "Check-in at Heritage Haveli Hotel",
+              "category": "Stay",
+              "time": "12:00 - 13:30",
+              "cost": 2800,
+              "notes": "Traditional Rajput architecture courtyard room"
+            },
+            {
+              "id": "act-r102",
+              "title": "Johari Bazaar Pyaz Kachori & Lassi Crawl",
+              "category": "Food & Street Treats",
+              "time": "16:00 - 18:30",
+              "cost": 450,
+              "notes": "Rawat Mishthan Bhandar hot kachori and Lassiwala kulhad"
+            }
+          ]
+        },
+        {
+          "id": "sec-ind-2",
+          "dayNumber": 2,
+          "date": "2026-08-21",
+          "title": "Amber Fort & Chokhi Dhani Royal Evening",
+          "dailyBudget": 5500,
+          "timeSpentHours": 8.5,
+          "activities": [
+            {
+              "id": "act-r201",
+              "title": "Amber Fort Guided Heritage Walk & Sheesh Mahal",
+              "category": "Royal Heritage",
+              "time": "08:30 - 12:00",
+              "cost": 500,
+              "notes": "Audio guide taken, clicked photos at Maota Lake"
+            },
+            {
+              "id": "act-r202",
+              "title": "Chokhi Dhani Rajasthani Village & Thali Feast",
+              "category": "Food & Cultural Dining",
+              "time": "18:00 - 22:00",
+              "cost": 1100,
+              "notes": "Royal Dal Baati Churma with Ghee and folk dance"
+            }
+          ]
+        },
+        {
+          "id": "sec-ind-3",
+          "dayNumber": 3,
+          "date": "2026-08-22",
+          "title": "Hawa Mahal Photo Op & City Palace Museum",
+          "dailyBudget": 4000,
+          "timeSpentHours": 7,
+          "activities": [
+            {
+              "id": "act-r301",
+              "title": "Morning Coffee opposite Hawa Mahal Wind Palace",
+              "category": "Sightseeing",
+              "time": "08:00 - 10:00",
+              "cost": 250,
+              "notes": "Tattoo Cafe rooftop view"
+            },
+            {
+              "id": "act-r302",
+              "title": "Jaipur City Palace & Chandra Mahal Tour",
+              "category": "Royal Heritage",
+              "time": "11:00 - 14:00",
+              "cost": 700,
+              "notes": "Saw royal costumes and armory collection"
+            }
+          ]
+        }
+      ],
+      "expensesBreakdown": {
+        "stay": 11200,
+        "transport": 4500,
+        "food": 5800,
+        "activities": 3600,
+        "misc": 1800
+      }
+    },
+    {
+      "id": "trip-ind-102",
+      "userId": "usr-ind-101",
+      "title": "Goa Coastal Vibes, Water Sports & Sunsets",
+      "destination": "North & South Goa",
+      "status": "upcoming",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-20",
+      "totalDays": 6,
+      "currentDay": 0,
+      "coverImage": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&auto=format&fit=crop&q=80",
+      "budgetTotal": 28000,
+      "budgetSpent": 4200,
+      "travelers": 3,
+      "isPublic": true,
+      "likes": 210,
+      "notes": "Renting Scooty in Anjuna. Water sports slot reserved at Grand Island for Day 2.",
+      "sections": [
+        {
+          "id": "sec-g1",
+          "dayNumber": 1,
+          "date": "2026-10-15",
+          "title": "Arrival, Scooty Rental & Vagator Sunset",
+          "dailyBudget": 4200,
+          "timeSpentHours": 5,
+          "activities": [
+            {
+              "id": "act-g101",
+              "title": "Mopa Airport to Anjuna Beach Resort",
+              "category": "Transport",
+              "time": "11:00 - 12:30",
+              "cost": 1400,
+              "notes": "Prepaid electric cab"
+            },
+            {
+              "id": "act-g102",
+              "title": "Vagator Beach Sunset & Chapora Fort Walk",
+              "category": "Sightseeing",
+              "time": "16:30 - 19:00",
+              "cost": 100,
+              "notes": "Dil Chahta Hai movie spot"
+            }
+          ]
+        }
+      ],
+      "expensesBreakdown": {
+        "stay": 12000,
+        "transport": 4800,
+        "food": 6500,
+        "activities": 3800,
+        "misc": 900
+      }
+    },
+    {
+      "id": "trip-ind-103",
+      "userId": "usr-ind-101",
+      "title": "Kerala Backwaters & Munnar Tea Plantation Escape",
+      "destination": "Kochi, Munnar & Alleppey",
+      "status": "completed",
+      "startDate": "2026-05-10",
+      "endDate": "2026-05-16",
+      "totalDays": 7,
+      "currentDay": 7,
+      "coverImage": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&auto=format&fit=crop&q=80",
+      "budgetTotal": 32000,
+      "budgetSpent": 30500,
+      "travelers": 2,
+      "isPublic": true,
+      "likes": 318,
+      "notes": "Houseboat experience in Alleppey was magical. Must buy fresh spices from Munnar.",
+      "sections": [
+        {
+          "id": "sec-k1",
+          "dayNumber": 1,
+          "date": "2026-05-10",
+          "title": "Overnight Houseboat in Alleppey",
+          "dailyBudget": 7500,
+          "timeSpentHours": 8,
+          "activities": [
+            {
+              "id": "act-k101",
+              "title": "Overnight Houseboat Cruise with Kerala Karimeen Fry",
+              "category": "Backwaters & Stay",
+              "time": "12:00 - 20:00",
+              "cost": 6500,
+              "notes": "Private deluxe houseboat with chef"
+            }
+          ]
+        }
+      ],
+      "expensesBreakdown": {
+        "stay": 14000,
+        "transport": 5200,
+        "food": 6800,
+        "activities": 3200,
+        "misc": 1300
+      }
+    }
+  ],
+  "communityTrips": [
+    {
+      "id": "comm-ind-1",
+      "author": {
+        "name": "Pooja Hegde",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
+        "badge": "Himalayan Explorer"
+      },
+      "title": "Ultimate 9-Day Leh-Ladakh Bike & Monastery Expedition",
+      "destination": "Manali, Jispa, Leh, Nubra, Pangong Tso",
+      "duration": "9 Days",
+      "budgetEstimate": "₹34,500",
+      "likes": 640,
+      "forks": 184,
+      "coverImage": "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?w=800&auto=format&fit=crop&q=80",
+      "description": "Royal Enfield ride over world's highest passes (Khardung La, Chang La), double-humped camel ride in Nubra dunes, and stargazing at Pangong.",
+      "highlights": [
+        "Khardung La Pass (17,982 ft)",
+        "Pangong Tso Blue Lake",
+        "Nubra Sand Dunes",
+        "Thiksey Monastery"
+      ]
+    },
+    {
+      "id": "comm-ind-2",
+      "author": {
+        "name": "Rohan Mehra",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
+        "badge": "Backpacker Gold"
+      },
+      "title": "Spiritual Varanasi & Golden Triangle Backpacking",
+      "destination": "Delhi, Agra, Jaipur, Varanasi",
+      "duration": "8 Days",
+      "budgetEstimate": "₹22,000",
+      "likes": 512,
+      "forks": 128,
+      "coverImage": "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=800&auto=format&fit=crop&q=80",
+      "description": "Sunrise Taj Mahal, Amber Fort elephants, Chandni Chowk street food, and Ganga Aarti boat cruises.",
+      "highlights": [
+        "Taj Mahal Sunrise",
+        "Varanasi Evening Ganga Aarti",
+        "Amber Fort Sheesh Mahal",
+        "Old Delhi Paranthe"
+      ]
+    },
+    {
+      "id": "comm-ind-3",
+      "author": {
+        "name": "Ananya Deshmukh",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop&q=80",
+        "badge": "Coastal Wanderer"
+      },
+      "title": "North to South Goa Hidden Cafés & Watersports",
+      "destination": "Panaji, Anjuna, Morjim, Palolem",
+      "duration": "6 Days",
+      "budgetEstimate": "₹18,500",
+      "likes": 478,
+      "forks": 96,
+      "coverImage": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&auto=format&fit=crop&q=80",
+      "description": "Fontainhas Latin Quarter heritage walks, Butterfly Beach boat tours, scuba diving, and sunset techno shacks.",
+      "highlights": [
+        "Grand Island Scuba",
+        "Fontainhas Colorful Alleys",
+        "Palolem Kayaking",
+        "Morjim Olive Ridley Beach"
+      ]
+    }
+  ],
+  "adminStats": {
+    "totalUsers": 28451,
+    "usersGrowthPercent": "+26.8%",
+    "totalTrips": 74202,
+    "tripsGrowthPercent": "+31.4%",
+    "popularCities": [
+      {
+        "name": "Goa (Beaches)",
+        "count": 18450,
+        "percentage": 92,
+        "color": "#0d9488"
+      },
+      {
+        "name": "Jaipur (Heritage)",
+        "count": 15200,
+        "percentage": 82,
+        "color": "#0284c7"
+      },
+      {
+        "name": "Manali (Snow/Hills)",
+        "count": 13900,
+        "percentage": 74,
+        "color": "#6366f1"
+      },
+      {
+        "name": "Leh-Ladakh (Adventure)",
+        "count": 11400,
+        "percentage": 62,
+        "color": "#f59e0b"
+      },
+      {
+        "name": "Kerala Backwaters",
+        "count": 9800,
+        "percentage": 52,
+        "color": "#10b981"
+      },
+      {
+        "name": "Varanasi (Spiritual)",
+        "count": 8600,
+        "percentage": 46,
+        "color": "#ec4899"
+      }
+    ],
+    "popularActivities": [
+      {
+        "category": "Royal Heritage & Forts",
+        "percentage": 32,
+        "count": 24500,
+        "color": "#0d9488"
+      },
+      {
+        "category": "Adventure & Mountain Treks",
+        "percentage": 28,
+        "count": 21200,
+        "color": "#0284c7"
+      },
+      {
+        "category": "Food & Street Feast",
+        "percentage": 20,
+        "count": 15400,
+        "color": "#f59e0b"
+      },
+      {
+        "category": "Beaches & Water Sports",
+        "percentage": 12,
+        "count": 9200,
+        "color": "#8b5cf6"
+      },
+      {
+        "category": "Spiritual & Ganga Aarti",
+        "percentage": 8,
+        "count": 6100,
+        "color": "#ec4899"
+      }
+    ],
+    "tripsCreatedPerDay": [
+      {
+        "day": "Mon",
+        "count": 320,
+        "label": "Aug 17"
+      },
+      {
+        "day": "Tue",
+        "count": 410,
+        "label": "Aug 18"
+      },
+      {
+        "day": "Wed",
+        "count": 480,
+        "label": "Aug 19"
+      },
+      {
+        "day": "Thu",
+        "count": 590,
+        "label": "Aug 20"
+      },
+      {
+        "day": "Fri",
+        "count": 780,
+        "label": "Aug 21"
+      },
+      {
+        "day": "Sat",
+        "count": 950,
+        "label": "Aug 22"
+      },
+      {
+        "day": "Sun",
+        "count": 890,
+        "label": "Aug 23"
+      }
+    ],
+    "recentActivityLogs": [
+      {
+        "id": "log-1",
+        "user": "Rohan Sharma (Delhi)",
+        "action": "Booked Jaipur & Udaipur Royal Trip",
+        "time": "2 mins ago",
+        "type": "trip"
+      },
+      {
+        "id": "log-2",
+        "user": "Sneha Patel (Ahmedabad)",
+        "action": "Forked Leh-Ladakh Bike Itinerary",
+        "time": "8 mins ago",
+        "type": "community"
+      },
+      {
+        "id": "log-3",
+        "user": "Vikram Nair (Bengaluru)",
+        "action": "Created Kerala Backwaters Itinerary",
+        "time": "18 mins ago",
+        "type": "user"
+      },
+      {
+        "id": "log-4",
+        "user": "Pooja Hegde (Mumbai)",
+        "action": "Added Grand Island Scuba to Goa Day 2",
+        "time": "29 mins ago",
+        "type": "activity"
+      },
+      {
+        "id": "log-5",
+        "user": "Aditya Verma (Lucknow)",
+        "action": "Updated Varanasi Ganga Aarti schedule",
+        "time": "45 mins ago",
+        "type": "budget"
+      }
+    ]
+  }
+}
