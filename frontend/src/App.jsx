@@ -9,13 +9,13 @@ import { LandingView } from './views/LandingView';
 import { AuthView } from './views/AuthView';
 import { MyTripsView } from './views/MyTripsView';
 import { CreateTripView } from './views/CreateTripView';
-// import { ItineraryBuilderView } from './views/ItineraryBuilderView';
+import { ItineraryBuilderView } from './views/ItineraryBuilderView';
 import { ItineraryDetailView } from './views/ItineraryDetailView';
-// import { SearchBrowseView } from './views/SearchBrowseView';
-// import { CalendarView } from './views/CalendarView';
-// import { CommunityView } from './views/CommunityView';
-// import { ProfileView } from './views/ProfileView';
-// import { AdminDashboardView } from './views/AdminDashboardView';
+import { SearchBrowseView } from './views/SearchBrowseView';
+import { CalendarView } from './views/CalendarView';
+import { CommunityView } from './views/CommunityView';
+import { ProfileView } from './views/ProfileView';
+import { AdminDashboardView } from './views/AdminDashboardView';
 
 export function App() {
   const { currentView } = useApp();
