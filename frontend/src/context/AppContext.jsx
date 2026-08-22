@@ -7,11 +7,15 @@ import {
   initialCommunityTrips,
   mockAdminStats
 } from '../data/mockData';
+import { apiService } from '../services/api';
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  // REQUIREMENT: When opening website, first screen should be the Login / Authentication Page
+  // Backend Connection Status
+  const [isBackendConnected, setIsBackendConnected] = useState(false);
+
+  // View Navigation State
   const [currentView, setCurrentView] = useState(() => {
     const savedAuth = localStorage.getItem('gt_is_authenticated');
     return savedAuth === 'true' ? 'landing' : 'auth';
@@ -49,7 +53,7 @@ export const AppProvider = ({ children }) => {
   const [selectedTripId, setSelectedTripId] = useState('trip-ind-101');
 
   // Cities & Activities
-  const [cities] = useState(initialCities);
+  const [cities, setCities] = useState(initialCities);
   const [activities, setActivities] = useState(initialActivities);
 
   // Community Feed
@@ -58,7 +62,56 @@ export const AppProvider = ({ children }) => {
   // Admin Stats
   const [adminStats, setAdminStats] = useState(mockAdminStats);
 
-  // Persistence
+  // Initial Sync with Backend Server if running
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        const health = await apiService.checkHealth();
+        if (health && health.status === 'online') {
+          setIsBackendConnected(true);
+
+          // Sync Cities
+          const citiesRes = await apiService.getCities();
+          if (citiesRes.success && citiesRes.cities?.length) {
+            setCities(citiesRes.cities);
+          }
+
+          // Sync Activities
+          const actRes = await apiService.getActivities();
+          if (actRes.success && actRes.activities?.length) {
+            setActivities(actRes.activities);
+          }
+
+          // Sync Community Trips
+          const commRes = await apiService.getCommunityTrips();
+          if (commRes.success && commRes.communityTrips?.length) {
+            setCommunityTrips(commRes.communityTrips);
+          }
+
+          // Sync Admin Stats
+          const adminRes = await apiService.getAdminStats();
+          if (adminRes.success && adminRes.adminStats) {
+            setAdminStats(adminRes.adminStats);
+          }
+
+          // Sync Trips if logged in
+          const tripsRes = await apiService.getTrips();
+          if (tripsRes.success && tripsRes.trips?.length) {
+            setTrips(tripsRes.trips);
+            if (!tripsRes.trips.some((t) => t.id === selectedTripId)) {
+              setSelectedTripId(tripsRes.trips[0].id);
+            }
+          }
+        }
+      } catch (e) {
+        console.log('Running in standalone mode with mock data fallback.');
+      }
+    };
+
+    fetchInitialData();
+  }, []);
+
+  // Persistence to localStorage
   useEffect(() => {
     localStorage.setItem('gt_ind_profile', JSON.stringify(userProfile));
   }, [userProfile]);
@@ -79,14 +132,12 @@ export const AppProvider = ({ children }) => {
 
   const validateIndianPhone = (phone) => {
     const digitsOnly = String(phone).replace(/\D/g, '');
-    // Must be 10 digits, or 12 digits if includes 91 country code
     if (digitsOnly.length === 10) return /^[6-9]\d{9}$/.test(digitsOnly);
     if (digitsOnly.length === 12 && digitsOnly.startsWith('91')) return /^[6-9]\d{9}$/.test(digitsOnly.slice(2));
     return false;
   };
 
   const validatePassword = (password) => {
-    // Min 6 chars, contains at least one letter and one number
     if (!password || password.length < 6) return false;
     return true;
   };
@@ -100,7 +151,6 @@ export const AppProvider = ({ children }) => {
 
   // Navigation Helper
   const navigateTo = (viewName, params = {}) => {
-    // If not authenticated and trying to access protected view, redirect to auth
     if (!isAuthenticated && viewName !== 'auth') {
       showToast('Please sign in or register to access GlobeTrotter planning features.', 'info');
       setCurrentView('auth');
@@ -115,10 +165,8 @@ export const AppProvider = ({ children }) => {
   };
 
   // Auth Handlers
-  const login = (identifier, password) => {
+  const login = async (identifier, password) => {
     const trimmedId = String(identifier).trim();
-
-    // Check if valid email or valid 10-digit phone
     const isEmail = validateEmail(trimmedId);
     const isPhone = validateIndianPhone(trimmedId);
 
@@ -132,6 +180,32 @@ export const AppProvider = ({ children }) => {
       return false;
     }
 
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.login(trimmedId, password);
+        if (res.success && res.user) {
+          setUserProfile(res.user);
+          setIsAuthenticated(true);
+          showToast(res.message || `Namaste ${res.user.firstName}! Welcome back.`);
+          setCurrentView('landing');
+          setViewParams({});
+          
+          // Refresh User Trips
+          const tripsRes = await apiService.getTrips();
+          if (tripsRes.success && tripsRes.trips) {
+            setTrips(tripsRes.trips);
+          }
+          return true;
+        } else {
+          showToast(res.message || 'Login failed', 'error');
+          return false;
+        }
+      } catch (err) {
+        console.error('Backend Login Error, falling back:', err);
+      }
+    }
+
+    // Local Fallback
     setIsAuthenticated(true);
     showToast(`Namaste ${userProfile.firstName}! Welcome back to GlobeTrotter India.`);
     setCurrentView('landing');
@@ -139,11 +213,27 @@ export const AppProvider = ({ children }) => {
     return true;
   };
 
-  const register = (formData) => {
+  const register = async (formData) => {
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.register(formData);
+        if (res.success && res.user) {
+          setUserProfile(res.user);
+          setIsAuthenticated(true);
+          showToast(res.message || 'Account verified and created successfully!');
+          setCurrentView('landing');
+          setViewParams({});
+          return true;
+        }
+      } catch (e) {
+        console.error('Backend Register error, falling back:', e);
+      }
+    }
+
     const updated = {
       ...userProfile,
-      firstName: formData.firstName || 'Riya',
-      lastName: formData.lastName || 'Daxini',
+      firstName: formData.firstName || 'Aarav',
+      lastName: formData.lastName || 'Sharma',
       email: formData.email || userProfile.email,
       phone: formData.phone || userProfile.phone,
       city: formData.city || userProfile.city,
@@ -160,12 +250,26 @@ export const AppProvider = ({ children }) => {
 
   const logout = () => {
     setIsAuthenticated(false);
+    localStorage.removeItem('gt_auth_token');
     showToast('You have been logged out safely.');
     setCurrentView('auth');
     setViewParams({ screen: 'login' });
   };
 
-  const updateUserProfile = (updatedFields) => {
+  const updateUserProfile = async (updatedFields) => {
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.updateProfile(updatedFields);
+        if (res.success && res.user) {
+          setUserProfile(res.user);
+          showToast('Profile & preferences updated successfully.');
+          return;
+        }
+      } catch (e) {
+        console.error('Update Profile error:', e);
+      }
+    }
+
     setUserProfile((prev) => {
       const updated = { ...prev, ...updatedFields };
       showToast('Profile & preferences updated successfully.');
@@ -173,16 +277,38 @@ export const AppProvider = ({ children }) => {
     });
   };
 
-  const deleteAccount = () => {
+  const deleteAccount = async () => {
+    if (isBackendConnected) {
+      try {
+        await apiService.deleteAccount();
+      } catch (e) {
+        console.error('Delete Account error:', e);
+      }
+    }
+
     setUserProfile(initialUserProfile);
     setIsAuthenticated(false);
     localStorage.removeItem('gt_is_authenticated');
+    localStorage.removeItem('gt_auth_token');
     showToast('Account deleted and session cleared.', 'error');
     setCurrentView('auth');
     setViewParams({ screen: 'register' });
   };
 
-  const toggleSaveDestination = (city) => {
+  const toggleSaveDestination = async (city) => {
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.toggleWishlist(city.id);
+        if (res.success && res.savedDestinations) {
+          setUserProfile((prev) => ({ ...prev, savedDestinations: res.savedDestinations }));
+          showToast(res.message);
+          return;
+        }
+      } catch (e) {
+        console.error('Toggle Wishlist error:', e);
+      }
+    }
+
     setUserProfile((prev) => {
       const exists = prev.savedDestinations.some((d) => d.id === city.id);
       let updatedSaved;
@@ -202,7 +328,7 @@ export const AppProvider = ({ children }) => {
     return trips.find((t) => t.id === selectedTripId) || trips[0];
   };
 
-  const createTrip = (tripData) => {
+  const createTrip = async (tripData) => {
     if (!tripData.title || tripData.title.trim().length < 3) {
       showToast('Trip name must be at least 3 characters.', 'error');
       return null;
@@ -215,6 +341,22 @@ export const AppProvider = ({ children }) => {
     if (isNaN(budgetNum) || budgetNum <= 0) {
       showToast('Please specify a valid budget in ₹ INR.', 'error');
       return null;
+    }
+
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.createTrip(tripData);
+        if (res.success && res.trip) {
+          setTrips((prev) => [res.trip, ...prev]);
+          setSelectedTripId(res.trip.id);
+          showToast(res.message);
+          setCurrentView('builder');
+          setViewParams({ tripId: res.trip.id });
+          return res.trip;
+        }
+      } catch (e) {
+        console.error('Create Trip error:', e);
+      }
     }
 
     const start = new Date(tripData.startDate);
@@ -272,14 +414,35 @@ export const AppProvider = ({ children }) => {
     return newTrip;
   };
 
-  const updateTrip = (tripId, updatedData) => {
+  const updateTrip = async (tripId, updatedData) => {
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.updateTrip(tripId, updatedData);
+        if (res.success && res.trip) {
+          setTrips((prev) => prev.map((t) => (t.id === tripId ? res.trip : t)));
+          showToast(res.message);
+          return;
+        }
+      } catch (e) {
+        console.error('Update Trip error:', e);
+      }
+    }
+
     setTrips((prev) =>
       prev.map((t) => (t.id === tripId ? { ...t, ...updatedData } : t))
     );
     showToast('Trip details updated.');
   };
 
-  const deleteTrip = (tripId) => {
+  const deleteTrip = async (tripId) => {
+    if (isBackendConnected) {
+      try {
+        await apiService.deleteTrip(tripId);
+      } catch (e) {
+        console.error('Delete Trip error:', e);
+      }
+    }
+
     setTrips((prev) => prev.filter((t) => t.id !== tripId));
     showToast('Trip has been deleted.', 'info');
     if (selectedTripId === tripId && trips.length > 1) {
@@ -287,7 +450,20 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const addSectionToTrip = (tripId, customTitle = '') => {
+  const addSectionToTrip = async (tripId, customTitle = '') => {
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.addSection(tripId, customTitle);
+        if (res.success && res.trip) {
+          setTrips((prev) => prev.map((t) => (t.id === tripId ? res.trip : t)));
+          showToast(res.message);
+          return;
+        }
+      } catch (e) {
+        console.error('Add Section error:', e);
+      }
+    }
+
     setTrips((prev) =>
       prev.map((t) => {
         if (t.id !== tripId) return t;
@@ -310,7 +486,20 @@ export const AppProvider = ({ children }) => {
     showToast('New Stop added to itinerary.');
   };
 
-  const removeSectionFromTrip = (tripId, sectionId) => {
+  const removeSectionFromTrip = async (tripId, sectionId) => {
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.removeSection(tripId, sectionId);
+        if (res.success && res.trip) {
+          setTrips((prev) => prev.map((t) => (t.id === tripId ? res.trip : t)));
+          showToast(res.message);
+          return;
+        }
+      } catch (e) {
+        console.error('Remove Section error:', e);
+      }
+    }
+
     setTrips((prev) =>
       prev.map((t) => {
         if (t.id !== tripId) return t;
@@ -323,10 +512,23 @@ export const AppProvider = ({ children }) => {
     showToast('Stop removed from itinerary.');
   };
 
-  const addActivityToSection = (tripId, sectionId, activityData) => {
+  const addActivityToSection = async (tripId, sectionId, activityData) => {
     if (!activityData.title || activityData.title.trim().length === 0) {
       showToast('Activity title is required.', 'error');
       return;
+    }
+
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.addActivityToSection(tripId, sectionId, activityData);
+        if (res.success && res.trip) {
+          setTrips((prev) => prev.map((t) => (t.id === tripId ? res.trip : t)));
+          showToast(res.message);
+          return;
+        }
+      } catch (e) {
+        console.error('Add Activity error:', e);
+      }
     }
 
     setTrips((prev) =>
@@ -354,7 +556,20 @@ export const AppProvider = ({ children }) => {
     showToast(`Added "${activityData.title}" (₹${activityData.cost || 0}) to itinerary.`);
   };
 
-  const removeActivityFromSection = (tripId, sectionId, activityId) => {
+  const removeActivityFromSection = async (tripId, sectionId, activityId) => {
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.removeActivityFromSection(tripId, sectionId, activityId);
+        if (res.success && res.trip) {
+          setTrips((prev) => prev.map((t) => (t.id === tripId ? res.trip : t)));
+          showToast(res.message);
+          return;
+        }
+      } catch (e) {
+        console.error('Remove Activity error:', e);
+      }
+    }
+
     setTrips((prev) =>
       prev.map((t) => {
         if (t.id !== tripId) return t;
@@ -389,14 +604,44 @@ export const AppProvider = ({ children }) => {
     );
   };
 
-  const likeCommunityTrip = (commId) => {
+  const likeCommunityTrip = async (commId) => {
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.likeCommunityTrip(commId);
+        if (res.success) {
+          setCommunityTrips((prev) =>
+            prev.map((c) => (c.id === commId ? { ...c, likes: res.likes } : c))
+          );
+          showToast(res.message);
+          return;
+        }
+      } catch (e) {
+        console.error('Like Community Trip error:', e);
+      }
+    }
+
     setCommunityTrips((prev) =>
       prev.map((c) => (c.id === commId ? { ...c, likes: c.likes + 1 } : c))
     );
     showToast('Liked Indian community itinerary! ❤️');
   };
 
-  const forkCommunityTrip = (commTrip) => {
+  const forkCommunityTrip = async (commTrip) => {
+    if (isBackendConnected) {
+      try {
+        const res = await apiService.forkCommunityTrip(commTrip.id);
+        if (res.success && res.trip) {
+          setTrips((prev) => [res.trip, ...prev]);
+          setSelectedTripId(res.trip.id);
+          showToast(res.message);
+          setCurrentView('my-trips');
+          return;
+        }
+      } catch (e) {
+        console.error('Fork Community Trip error:', e);
+      }
+    }
+
     const forked = {
       id: `trip-forked-${Date.now()}`,
       title: `${commTrip.title} (My Plan)`,
@@ -450,6 +695,7 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        isBackendConnected,
         currentView,
         viewParams,
         navigateTo,
