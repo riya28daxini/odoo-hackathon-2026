@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { JsonDB } from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
+import tripRoutes from './routes/tripRoutes.js'
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ let PORT = Number(process.env.PORT) || 5000;
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use('./api/trips', tripRoutes)
 
 // Request logger
 app.use((req, res, next) => {
